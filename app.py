@@ -93,8 +93,13 @@ def masuk(Username, Password):
         print("Anda belum terdaftar, silahkan daftar terlebih dahulu!")
 
 def daftar(Username, Password):
-    file = open("Data/users.txt", "a")
-    file.write(f"\n{Username}"+f"#{Password}")
+    file = open("Data/users.txt", "r")
+    if os.stat("Data/users.txt").st_size == 0:
+        file = open("Data/users.txt", "a")
+        file.write(f"{Username}"+f"#{Password}")
+    else:
+        file = open("Data/users.txt", "a")
+        file.write(f"\n{Username}"+f"#{Password}")
 
 def access(opsi):
     global Username
