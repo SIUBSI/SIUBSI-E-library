@@ -1,59 +1,40 @@
 # MENGIMPORT MODUL
 import getpass, time, os
+import re
 from datetime import datetime
 
 # LIST BERISI DAFTAR BUKU BESERTA DETAILNYA
 DaftarBuku = [
     # Page 1
-    ["Pengantar teori dan algoritma graph", "220868",
-        "Suryadi", "1990", "Indonesia", "Gunadarma"],
-    ["English conversations plus", "210646", "Sonny pradana",
-        "2010", "Indonesia-Ingrris", "Setia Kawan Press"],
-    ["Linux untuk pratikum administrasi jaringan", "210606",
-        "Budi Susanto", "2003", "Indonesia", "Gava Media"],
-    ["Administrasi jaringan komputer lintas platform", "210481",
-        "Ridwan Sanjaya, Paulus Ricky Kusuma dan Bastian Rae Lukito", "2005", "Indonesia", "PT Elex Media Komputindo"],
-    ["Membangun jaringan komputer praktis sehari - hari", "210514",
-        "Iwan Binanto", "2007", "Indonesia", "Graha Ilmu"],
-    ["Administrasi jaringan menggunakan linux ubuntu 7", "208403",
-        "Dewi Prabantini (Ed)", "2008", "Indonesia", "ANDI"],
-    ["Statistika dengan program komputer", "208445",
-        "Ahmad Kholiqul Amin", "2015", "Indonesia", "Deepublish"],
-    ["Penyuntingan bahasa indonesia untuk karang-mengarang",
-        "210157", "Kunjana Rahardi", "2009", "Indonesia", "Erlangga"],
-    ["Robotika : desain, kontrol, dan kecerdasan buatan",
-        "210119", "Endra Pitowarno", "2006", "Indonesia", "ANDI"],
-    ["Struktur data dan pemrograman dengan pascal", "208144",
-        "Heri Sismoro dan Kusrini Ikandar", "2004", "Indonesia", "ANDI"],
+    ["Pengantar teori dan algoritma graph", "220868","Suryadi", "1990", "Indonesia", "Gunadarma"],
+    ["English conversations plus", "210646", "Sonny pradana","2010", "Indonesia-Ingrris", "Setia Kawan Press"],
+    ["Linux untuk pratikum administrasi jaringan", "210606","Budi Susanto", "2003", "Indonesia", "Gava Media"],
+    ["Administrasi jaringan komputer lintas platform", "210481","Ridwan Sanjaya, Paulus Ricky Kusuma dan Bastian Rae Lukito", "2005", "Indonesia", "PT Elex Media Komputindo"],
+    ["Membangun jaringan komputer praktis sehari - hari", "210514","Iwan Binanto", "2007", "Indonesia", "Graha Ilmu"],
+    ["Administrasi jaringan menggunakan linux ubuntu 7", "208403","Dewi Prabantini (Ed)", "2008", "Indonesia", "ANDI"],
+    ["Statistika dengan program komputer", "208445","Ahmad Kholiqul Amin", "2015", "Indonesia", "Deepublish"],
+    ["Penyuntingan bahasa indonesia untuk karang-mengarang","210157", "Kunjana Rahardi", "2009", "Indonesia", "Erlangga"],
+    ["Robotika : desain, kontrol, dan kecerdasan buatan","210119", "Endra Pitowarno", "2006", "Indonesia", "ANDI"],
+    ["Struktur data dan pemrograman dengan pascal", "208144","Heri Sismoro dan Kusrini Ikandar", "2004", "Indonesia", "ANDI"],
 
     # Page 2
-    ["Logika dan algoritma dasar menggunakan bahasa C++", "210646",
-        "Indarwoko Kurniadi", "2013", "Indonesia", "Mitra Wacana Media"],
-    ["Konsep kecerdasan buatan", "210646",
-        "Anita Desiani dan Muhammad Arhami", "2006", "Indonesia", "ANDI"],
-    ["Dasar - dasar pemrograman pascal", "210646",
-        "Abdul Kadir", "2007", "Indonesia", "ANDI"],
-    ["Menguasai presentasi dengan microsoft powerpoint xp", "210646",
-        "Triton Prawiro Budi", "2005", "Indonesia", "Tugu Publisher"],
-    ["36 jam belajar komputer microsoft office powerpoint 2003", "210646",
-        "Budi Permana", "2005", "Indonesia", "PT Elex Media Komputindo"],
-    ["Troubleshooting windows xp : konsultasi dengan ahlinya", "210646",
-        "Jubilee Enterprise", "2008", "Indonesia", "PT Elex Media Komputindo"],
-    ["Microsoft windows me : sistem operasi masa depan", "210646",
-        "Wali Eko Djatmiko", "2001", "Indonesia", "ANDI"],
-    ["CISCO CCNA jaringan komputer", "210646",
-        "Iwan Sofana", "2010", "Indonesia", "INFORMATIKA"],
-    ["Kamus andal microsoft excel 2000", "210646",
-        "Rijanto Tosin", "2000", "bahasa", "Dinastindo"],
-    ["Teknik komputer jaringan (sistem operasi dan jaringan)", "210646",
-     "Muhammad Badrul dkk", "2010", "Indonesia", "Inti Prima"],
+    ["Logika dan algoritma dasar menggunakan bahasa C++", "208234","Indarwoko Kurniadi", "2013", "Indonesia", "Mitra Wacana Media"],
+    ["Konsep kecerdasan buatan", "208067","Anita Desiani dan Muhammad Arhami", "2006", "Indonesia", "ANDI"],
+    ["Dasar - dasar pemrograman pascal", "208133","Abdul Kadir", "2007", "Indonesia", "ANDI"],
+    ["Menguasai presentasi dengan microsoft powerpoint xp", "206956","Triton Prawiro Budi", "2005", "Indonesia", "Tugu Publisher"],
+    ["36 jam belajar komputer microsoft office powerpoint 2003", "206960","Budi Permana", "2005", "Indonesia", "PT Elex Media Komputindo"],
+    ["Troubleshooting windows xp : konsultasi dengan ahlinya", "207127","Jubilee Enterprise", "2008", "Indonesia", "PT Elex Media Komputindo"],
+    ["Microsoft windows me : sistem operasi masa depan", "207169","Wali Eko Djatmiko", "2001", "Indonesia", "ANDI"],
+    ["CISCO CCNA jaringan komputer", "207813","Iwan Sofana", "2010", "Indonesia", "INFORMATIKA"],
+    ["Kamus andal microsoft excel 2000", "206901","Rijanto Tosin", "2000", "bahasa", "Dinastindo"],
+    ["Teknik komputer jaringan (sistem operasi dan jaringan)", "206919","Muhammad Badrul dkk", "2010", "Indonesia", "Inti Prima"],
 ]
 
 # ====== FUNGSI WELCOME MESSAGE ======
 def welcome():
     os.system("cls")
     print("\n"+'"SIUBSI E-library"'.center(60))
-    print('"Menyediakan Book maupun E-book dikhususkan untuk Prodi\nSistem Informasi pada Universitas Bina Sarana Informatika"\n\n')
+    print('"Menyediakan Buku untuk dipinjamkan, dikhususkan untuk Prodi\nSistem Informasi pada Universitas Bina Sarana Informatika"\n\n')
 
 # ====== FUNGSI JEDA ======
 def jeda(durasijeda): # dengan parameter jumlah durasi jeda-nya
@@ -64,32 +45,74 @@ def jeda(durasijeda): # dengan parameter jumlah durasi jeda-nya
 def daftarbuku(pagenum):
     if pagenum == 1:
         pagenum = DaftarBuku[0:10] # Menampilkan daftar buku dari 1 s/d 10
-        print("\n[Halaman: 1/2]\n") # Status Halaman
+        print("[Halaman: 1/2]\n") # Status Halaman
         print("No.\tKode Buku\tJudul Buku")
         print("---\t---------\t----------------------------------------------------------")
     elif pagenum == 2:
         pagenum = DaftarBuku[10:20]  # Menampilkan daftar buku dari 10 s/d 20
-        print("\n[Halaman: 2/2]\n") # Status Halaman
+        print("[Halaman: 2/2]\n") # Status Halaman
         print("No.\tKode Buku\tJudul Buku")
         print("---\t---------\t----------------------------------------------------------")
 
     # Menampilkan List buku sesuai halaman (menggunakan for loop)
     num = 0 # Sebagai nomor
     for i in pagenum:
-        num += 1
+        num += 1 # Supaya nomor terhitunga dari angka 1
         print(f"{num}.\t{i[1]}\t\t{i[0]}")
 
-def tambahpinjambuku(Name, judulbuku, timestamp):
-    file = open("Data/peminjaman.txt", "r")
-    if os.stat("Data/peminjaman.txt").st_size == 0:
-        file = open("Data/peminjaman.txt", "a")
-        file.write(f"{Name}#{judulbuku}#{timestamp}")
+# Kode ini akan menambahkan objek ke index belakang kedalam file peminjaman.txt
+def tambahpinjambuku(Name, kodebuku, judulbuku, timestamp):
+    file = open("Data/peminjaman.txt", "r") # Permission 'r' disini adalah sebagai read, guna untuk membaca file peminjaman.txt
+    if os.stat("Data/peminjaman.txt").st_size == 0: # Membaca apakah file peminjaman.txt sudah ada isinya atau belum, jika belum...
+        file = open("Data/peminjaman.txt", "a") # Permission 'a' disini adalah sebagai append, atau berfungsi untuk menambahkan item dari baris belakang.
+        file.write(f"{Name}#{kodebuku}#{judulbuku}#{timestamp}")
         file.close()
-    else:
+    else: # Jika sudah ada isinya, maka objek baru akan ditambah ke baris baru dengan menggunakan karakter escape '\n'.
         file = open("Data/peminjaman.txt", "a")
-        file.write(f"\n{Name}#{judulbuku}#{timestamp}")
+        file.write(f"\n{Name}#{kodebuku}#{judulbuku}#{timestamp}")
         file.close()
 
+# Memunculkan daftar stok buku secara keseluruhan
+def lihatstokbuku():
+    file = open("Data/stokbuku.txt", "r")
+    num = 0
+    for i in file:
+        num+=1
+        a, b, c = i.split("#") # '.split("#")', untuk memisahkan kata dengan menggunakan pemisah #
+        print(f"{num}. {a} ({b}) - Stok: {c}", end="") # 'end' memaksa menggantikan newline dengan nonkarakter
+    
+
+# Memunculkan stok buku by Kode Buku
+def jumlahstok(Kodebuku):
+    with open("Data/stokbuku.txt", 'r') as fp:
+        for l_no, line in enumerate(fp):
+            if Kodebuku in line:
+                l_no+=1
+                a, b, c = line.split("#")
+                c = int(c)
+                return c
+
+# Fungsi mengurangkan stok buku ketika buku dipinjam
+def kuranginstokbuku(Kodebuku):
+    file = open("Data/stokbuku.txt", "r")
+    for i in file:
+        a, b, c = i.split("#")
+        a == Kodebuku
+        c = int(c)
+
+        with open("Data/stokbuku.txt", "r") as files:
+            filedata = files.read()
+            if Kodebuku in filedata:
+                jumlah = c-1
+                filedata = filedata.replace(f"{Kodebuku}#{c}", f"{Kodebuku}#{jumlah}")
+
+                with open("Data/stokbuku.txt", "w") as files:
+                        files.write(filedata)
+                files.close()
+            else:
+                print(f"Kode buku {Kodebuku} tidak ditemukan.")
+
+# Fungsi konfirmasi Peminjaman buku
 def pinjambuku(Name, Kodebuku):
     Name = Name
     dt = datetime.now()
@@ -99,31 +122,37 @@ def pinjambuku(Name, Kodebuku):
             os.system("cls")
             print('"SIUBSI E-library"'.center(60))
             print(f"Meminjam buku dengan kode buku `{Kodebuku}`".center(60))
-            print("Data Peminjam:".center(60))
-            print(f"Nama: {Name}\nBuku yang dipinjam: {i[0]} ({i[1]})\nWaktu: {dt}")
-            tambahpinjambuku(Name, i[0], ts)
+            print(f"-------------------------------------------".center(60))
+            if jumlahstok(Kodebuku) is not 0 or jumlahstok(Kodebuku) > 0:
+                print("\n----- Data Peminjam -----")
+                tambahpinjambuku(Name, i[1], i[0], ts)
+                kuranginstokbuku(Kodebuku)
+                print(f"Nama: {Name}\nBuku yang dipinjam: {i[0]} ({i[1]})\nWaktu: {dt}\nSisa stok buku: {jumlahstok(Kodebuku)}")
+            else:
+                print(f"\nProses peminjaman buku gagal, Stok buku dengan judul `{i[0]}` tidak tersedia!")
             break
         else:
-            print(f"Kode buku `{Kodebuku}` tidak ditemukan.")
-            break
+            pass
     else:
-        pass
+        print(f"Kode buku `{Kodebuku}` tidak ditemukan.")
 
-# Fungsi ini akan menampilkan detail buku sesuai dengan kode buku yang dipilih
+# Fungsi ini akan menampilkan detail buku by Kode Buku tsb
 def detailbuku(kodebuku):
     for i in DaftarBuku[0:20]: # Mengambil data buku dari 1 s/d 20
         if kodebuku in i[1]: # [1] guna untuk mengambil kode buku tiap list
             jeda(1)
             print('"SIUBSI E-library"'.center(60))
             print(f"Menampilkan detail Buku dengan kode buku `{kodebuku}`".center(60))
+            print("------------------------------------------------------".center(60))
             return print(f"""
-            Kode Buku: {i[1]}
-            Judul Buku: {i[0]}
-            Penulis: {i[2]}
-            Tahun: {i[3]}
-            Bahasa: {i[4]}
-            Penerbit: {i[5]}
-            Link: https://elibrary.bsi.ac.id/readbook/{i[1]}/{i[0].replace(" ", "-")}
+Kode Buku: {i[1]}
+Judul Buku: {i[0]}
+Penulis: {i[2]}
+Tahun: {i[3]}
+Bahasa: {i[4]}
+Penerbit: {i[5]}
+Jumlah Stok: {jumlahstok(kodebuku)}
+Link: https://elibrary.bsi.ac.id/readbook/{i[1]}/{i[0].replace(" ", "-")}
             """, end="")
         else:
             pass
@@ -244,7 +273,10 @@ def akses(opsi):
         file = open("Data/users.txt", "r")
 
         print("Daftar User terdaftar pada program".center(60))
-        print('"SIUBSI E-library"'.center(60)+"\n")
+        print('"SIUBSI E-library"'.center(60))
+        print('----------------------------------'.center(60)+"\n")
+        if os.stat("Data/users.txt").st_size == 0:
+            return print("Tidak ada user yang terdaftar saat ini.")
         Name = ""
         Username = ""
         Password = ""
@@ -256,24 +288,33 @@ def akses(opsi):
             b == Username
             c == Password
             print(f"{num}. {a} ({b})")
+
     elif opsi == "4":
         jeda(1)
         os.system("cls")
         file = open("Data/peminjaman.txt", "r")
 
         print("Daftar Buku yang sedang dipinjam pada program".center(60))
-        print('"SIUBSI E-library"'.center(60)+"\n")
+        print('"SIUBSI E-library"'.center(60))
+        print("---------------------------------------------".center(60)+"\n")
+        if os.stat("Data/peminjaman.txt").st_size == 0:
+            return print("Tidak ada buku yang sedang dipinjam saat ini.")
         Name = ""
         Kodebuku = ""
+        Judulbuku = ""
         num = 0
         for i in file:
             num += 1
-            a, b, c = i.split("#")
+            a, b, c, d = i.split("#")
             a == Name
             b == Kodebuku
-            dt = datetime.fromtimestamp(float(c))
-            print(f"{num}. {a} ({b}) | Waktu pinjam: {dt}")
-
+            c == Judulbuku
+            dt = datetime.fromtimestamp(float(d))
+            print(f"{num}. {a} ({c} | {b}) | Waktu pinjam: {dt}")
+    elif opsi == "5":
+        print("\n")
+        lihatstokbuku()
+            
     else:
         print(f"Menu {opsi} tidak diketahui.")
 
@@ -285,8 +326,9 @@ def mulai():
     print("[2] Masuk (Silahkan pilih menu ini jika anda sudah mempunyai akun)")
     print("[3] Tampilkan User terdaftar")
     print("[4] Tampilkan Buku yang sedang dipinjam")
-    opsi = input("Masukkan pilihan [1|2]: ")
-    if opsi != "1" and opsi != "2" and opsi != "3" and opsi != "4":
+    print("[5] Tampilkan Stok Buku keseluruhan")
+    opsi = input("Masukkan pilihan [1|2|3|4|5]: ")
+    if opsi != "1" and opsi != "2" and opsi != "3" and opsi != "4" and opsi != "5":
         mulai()
 
 
