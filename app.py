@@ -1,6 +1,5 @@
 # MENGIMPORT MODUL
 import getpass, time, os
-import re
 from datetime import datetime
 
 # LIST BERISI DAFTAR BUKU BESERTA DETAILNYA
