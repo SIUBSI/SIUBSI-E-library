@@ -107,7 +107,7 @@ def kuranginstokbuku(Kodebuku):
             filedata = files.read()
             if Kodebuku in filedata:
                 jumlah = c-1
-                filedata = filedata.replace(f"{Kodebuku}#{c}", f"{Kodebuku}#{jumlah}")
+                filedata = filedata.replace(f"{a}#{Kodebuku}#{c}", f"{a}#{Kodebuku}#{jumlah}")
 
                 with open("Data/stokbuku.txt", "w") as files:
                         files.write(filedata)
