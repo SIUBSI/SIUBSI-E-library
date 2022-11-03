@@ -32,8 +32,12 @@ DaftarBuku = [
 # ====== FUNGSI WELCOME MESSAGE ======
 def welcome():
     os.system("cls")
-    print("\n"+'"SIUBSI E-library"'.center(60))
-    print('"Menyediakan Buku untuk dipinjamkan, dikhususkan untuk Prodi\nSistem Informasi pada Universitas Bina Sarana Informatika"\n\n')
+    print("--------------------".center(60))
+    print("| SIUBSI E-library |".center(60))
+    print("--------------------".center(60))
+    print('"Layanan peminjaman Buku yang dikhususkan untuk Mahasiswa/i ber-Program Studi'+'\n'+
+          '\'Sistem Informasi\' pada \'Universitas Bina Sarana Informatika\'"')
+    print("\n")
 
 # ====== FUNGSI JEDA ======
 def jeda(durasijeda): # dengan parameter jumlah durasi jeda-nya
@@ -79,8 +83,8 @@ def lihatstokbuku():
         num+=1
         a, b, c = i.split("#") # '.split("#")', untuk memisahkan kata dengan menggunakan pemisah #
         print(f"{num}. {a} ({b}) - Stok: {c}", end="") # 'end' memaksa menggantikan newline dengan nonkarakter
-    
 
+        
 # Memunculkan stok buku by Kode Buku
 def jumlahstok(Kodebuku):
     with open("Data/stokbuku.txt", 'r') as fp:
@@ -96,7 +100,7 @@ def kuranginstokbuku(Kodebuku):
     file = open("Data/stokbuku.txt", "r")
     for i in file:
         a, b, c = i.split("#")
-        a == Kodebuku
+        b == Kodebuku
         c = int(c)
 
         with open("Data/stokbuku.txt", "r") as files:
@@ -229,8 +233,10 @@ def akses(opsi):
     global Name
     if opsi == "1":
         jeda(1)
-        print("Pendaftaran akun pada program".center(60))
-        print('"SIUBSI E-library"'.center(60))
+        print("--------------------".center(60))
+        print("| SIUBSI E-library |".center(60))
+        print("--------------------".center(60))
+        print('Pendaftaran Akun pada layanan SIUBSI E-library.'.center(60))
         print("\n[Pesan] Masukkan Username dan Password untuk akun anda.")
         Name = input("Masukkan nama lengkap: ")
         Username = input("Masukkan Username: ")
@@ -251,7 +257,10 @@ def akses(opsi):
             daftar(Name, Username, Password)
             print(f"[Pesan] Berhasil membuat akun.")
             jeda(1)
-            print("Pendaftaran akun pada program".center(60))
+            print("--------------------".center(60))
+            print("| SIUBSI E-library |".center(60))
+            print("--------------------".center(60))
+            print("Pendaftaran akun pada layanan SIUBSI E-library".center(60))
             print('"SIUBSI E-library"'.center(60))
             print(f"\n[Pesan] Selamat datang {Name}.\n")
 
@@ -260,8 +269,11 @@ def akses(opsi):
             masuk(Username, Password)
     elif opsi == "2":
         jeda(1)
-        print("Prosesi masuk pada program".center(60))
-        print('"SIUBSI E-library"'.center(60))
+        print("--------------------".center(60))
+        print("| SIUBSI E-library |".center(60))
+        print("--------------------".center(60))
+        print('"Prosesi masuk dengan menginput'.center(60) + '\n' +
+              '\'Username & Password\' pada layanan SIUBSI E-Library"'.center(60))
         print("\n[Pesan] Masukkan Username dan Password akun anda dengan benar.")
         Username = input("Masukkan Username anda: ")
         Password = getpass.getpass("Masukkan Password anda: ")
@@ -271,11 +283,17 @@ def akses(opsi):
         os.system("cls")
         file = open("Data/users.txt", "r")
 
-        print("Daftar User terdaftar pada program".center(60))
-        print('"SIUBSI E-library"'.center(60))
-        print('----------------------------------'.center(60)+"\n")
+        print("--------------------".center(60))
+        print("| SIUBSI E-library |".center(60))
+        print("--------------------".center(60))
+        print("Daftar User terdaftar pada layanan SIUBSI E-library".center(60))
         if os.stat("Data/users.txt").st_size == 0:
-            return print("Tidak ada user yang terdaftar saat ini.")
+            print("\n[Pesan] Tidak ada user yang terdaftar saat ini.\n\n[1]. Daftar akun\n[2]. Keluar layanan")
+            Pilihan = input("Masukkan pilihan [1|2]: ")
+            if Pilihan == "1":
+                print("Daftar")
+            elif Pilihan == "2":
+                exit()
         Name = ""
         Username = ""
         Password = ""
