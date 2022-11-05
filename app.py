@@ -1,4 +1,4 @@
-# MENGIMPORT MODUL
+# MENGIMPOR MODUL
 import getpass
 import time
 import os
@@ -7,52 +7,31 @@ from datetime import datetime
 # LIST BERISI DAFTAR BUKU BESERTA DETAILNYA
 DaftarBuku = [
     # Page 1
-    ["Pengantar teori dan algoritma graph", "220868",
-        "Suryadi", "1990", "Indonesia", "Gunadarma"],
-    ["English conversations plus", "210646", "Sonny pradana",
-        "2010", "Indonesia-Ingrris", "Setia Kawan Press"],
-    ["Linux untuk pratikum administrasi jaringan", "210606",
-        "Budi Susanto", "2003", "Indonesia", "Gava Media"],
-    ["Administrasi jaringan komputer lintas platform", "210481",
-        "Ridwan Sanjaya, Paulus Ricky Kusuma dan Bastian Rae Lukito", "2005", "Indonesia", "PT Elex Media Komputindo"],
-    ["Membangun jaringan komputer praktis sehari - hari", "210514",
-        "Iwan Binanto", "2007", "Indonesia", "Graha Ilmu"],
-    ["Administrasi jaringan menggunakan linux ubuntu 7", "208403",
-        "Dewi Prabantini (Ed)", "2008", "Indonesia", "ANDI"],
-    ["Statistika dengan program komputer", "208445",
-        "Ahmad Kholiqul Amin", "2015", "Indonesia", "Deepublish"],
-    ["Penyuntingan bahasa indonesia untuk karang-mengarang",
-        "210157", "Kunjana Rahardi", "2009", "Indonesia", "Erlangga"],
-    ["Robotika : desain, kontrol, dan kecerdasan buatan",
-        "210119", "Endra Pitowarno", "2006", "Indonesia", "ANDI"],
-    ["Struktur data dan pemrograman dengan pascal", "208144",
-        "Heri Sismoro dan Kusrini Ikandar", "2004", "Indonesia", "ANDI"],
+    ["Pengantar teori dan algoritma graph", "220868","Suryadi", "1990", "Indonesia", "Gunadarma"],
+    ["English conversations plus", "210646", "Sonny pradana","2010", "Indonesia-Ingrris", "Setia Kawan Press"],
+    ["Linux untuk pratikum administrasi jaringan", "210606","Budi Susanto", "2003", "Indonesia", "Gava Media"],
+    ["Administrasi jaringan komputer lintas platform", "210481","Ridwan Sanjaya, Paulus Ricky Kusuma dan Bastian Rae Lukito", "2005", "Indonesia", "PT Elex Media Komputindo"],
+    ["Membangun jaringan komputer praktis sehari - hari", "210514","Iwan Binanto", "2007", "Indonesia", "Graha Ilmu"],
+    ["Administrasi jaringan menggunakan linux ubuntu 7", "208403","Dewi Prabantini (Ed)", "2008", "Indonesia", "ANDI"],
+    ["Statistika dengan program komputer", "208445","Ahmad Kholiqul Amin", "2015", "Indonesia", "Deepublish"],
+    ["Penyuntingan bahasa indonesia untuk karang-mengarang","210157", "Kunjana Rahardi", "2009", "Indonesia", "Erlangga"],
+    ["Robotika : desain, kontrol, dan kecerdasan buatan","210119", "Endra Pitowarno", "2006", "Indonesia", "ANDI"],
+    ["Struktur data dan pemrograman dengan pascal", "208144","Heri Sismoro dan Kusrini Ikandar", "2004", "Indonesia", "ANDI"],
 
     # Page 2
-    ["Logika dan algoritma dasar menggunakan bahasa C++", "208234",
-        "Indarwoko Kurniadi", "2013", "Indonesia", "Mitra Wacana Media"],
-    ["Konsep kecerdasan buatan", "208067",
-        "Anita Desiani dan Muhammad Arhami", "2006", "Indonesia", "ANDI"],
-    ["Dasar - dasar pemrograman pascal", "208133",
-        "Abdul Kadir", "2007", "Indonesia", "ANDI"],
-    ["Menguasai presentasi dengan microsoft powerpoint xp", "206956",
-        "Triton Prawiro Budi", "2005", "Indonesia", "Tugu Publisher"],
-    ["36 jam belajar komputer microsoft office powerpoint 2003", "206960",
-        "Budi Permana", "2005", "Indonesia", "PT Elex Media Komputindo"],
-    ["Troubleshooting windows xp : konsultasi dengan ahlinya", "207127",
-        "Jubilee Enterprise", "2008", "Indonesia", "PT Elex Media Komputindo"],
-    ["Microsoft windows me : sistem operasi masa depan", "207169",
-        "Wali Eko Djatmiko", "2001", "Indonesia", "ANDI"],
-    ["CISCO CCNA jaringan komputer", "207813",
-        "Iwan Sofana", "2010", "Indonesia", "INFORMATIKA"],
-    ["Kamus andal microsoft excel 2000", "206901",
-        "Rijanto Tosin", "2000", "bahasa", "Dinastindo"],
-    ["Teknik komputer jaringan (sistem operasi dan jaringan)", "206919",
-     "Muhammad Badrul dkk", "2010", "Indonesia", "Inti Prima"],
+    ["Logika dan algoritma dasar menggunakan bahasa C++", "208234","Indarwoko Kurniadi", "2013", "Indonesia", "Mitra Wacana Media"],
+    ["Konsep kecerdasan buatan", "208067","Anita Desiani dan Muhammad Arhami", "2006", "Indonesia", "ANDI"],
+    ["Dasar - dasar pemrograman pascal", "208133","Abdul Kadir", "2007", "Indonesia", "ANDI"],
+    ["Menguasai presentasi dengan microsoft powerpoint xp", "206956","Triton Prawiro Budi", "2005", "Indonesia", "Tugu Publisher"],
+    ["36 jam belajar komputer microsoft office powerpoint 2003", "206960","Budi Permana", "2005", "Indonesia", "PT Elex Media Komputindo"],
+    ["Troubleshooting windows xp : konsultasi dengan ahlinya", "207127","Jubilee Enterprise", "2008", "Indonesia", "PT Elex Media Komputindo"],
+    ["Microsoft windows me : sistem operasi masa depan", "207169","Wali Eko Djatmiko", "2001", "Indonesia", "ANDI"],
+    ["CISCO CCNA jaringan komputer", "207813","Iwan Sofana", "2010", "Indonesia", "INFORMATIKA"],
+    ["Kamus andal microsoft excel 2000", "206901","Rijanto Tosin", "2000", "bahasa", "Dinastindo"],
+    ["Teknik komputer jaringan (sistem operasi dan jaringan)", "206919","Muhammad Badrul dkk", "2010", "Indonesia", "Inti Prima"],
 ]
 
 # ====== FUNGSI WELCOME MESSAGE ======
-
 def welcome():
     os.system("cls")
     siubsielibrary(60, "Layanan peminjaman Buku yang dikhususkan untuk Mahasiswa/i ber-Program Studi"+"\n" +                    "\'Sistem Informasi\' pada \'Universitas Bina Sarana Informatika\'")
@@ -65,15 +44,11 @@ def siubsielibrary(centernum, text):
     print(text.center(centernum))
 
 # ====== FUNGSI JEDA ======
-
-
 def jeda(durasijeda):  # dengan parameter jumlah durasi jeda-nya
     time.sleep(durasijeda)  # eksekusi perintah jeda
     os.system("cls")  # Clear screen menggunakan modul os
 
 # ====== FUNGSI BUKU ======
-
-
 def daftarbuku(pagenum):
     if pagenum == 1:
         pagenum = DaftarBuku[0:10]  # Menampilkan daftar buku dari 1 s/d 10
@@ -93,14 +68,12 @@ def daftarbuku(pagenum):
         print(f"{num}.\t{i[1]}\t\t{i[0]}")
 
 # Kode ini akan menambahkan objek ke index belakang kedalam file peminjaman.txt
-
-
 def tambahpinjambuku(Name, kodebuku, judulbuku, timestamp):
     # Permission 'r' disini adalah sebagai read, guna untuk membaca file peminjaman.txt
     file = open("Data/peminjaman.txt", "r")
     # Membaca apakah file peminjaman.txt sudah ada isinya atau belum, jika belum...
     if os.stat("Data/peminjaman.txt").st_size == 0:
-        # Permission 'a' disini adalah sebagai append, atau berfungsi untuk menambahkan item dari baris belakang.
+        # Permission 'a' disini adalah sebagai append, atau berfungsi untuk menambahkan item dari baris bawah/akhir.
         file = open("Data/peminjaman.txt", "a")
         file.write(f"{Name}#{kodebuku}#{judulbuku}#{timestamp}")
         file.close()
@@ -110,8 +83,6 @@ def tambahpinjambuku(Name, kodebuku, judulbuku, timestamp):
         file.close()
 
 # Memunculkan daftar stok buku secara keseluruhan
-
-
 def lihatstokbuku():
     file = open("Data/stokbuku.txt", "r")
     num = 0
@@ -134,8 +105,6 @@ def jumlahstok(Kodebuku):
                 return c
 
 # Fungsi mengurangkan stok buku ketika buku dipinjam
-
-
 def kuranginstokbuku(Kodebuku):
     file = open("Data/stokbuku.txt", "r")
     for i in file:
@@ -157,8 +126,6 @@ def kuranginstokbuku(Kodebuku):
                 print(f"Kode buku {Kodebuku} tidak ditemukan.")
 
 # Fungsi konfirmasi Peminjaman buku
-
-
 def pinjambuku(Name, Kodebuku):
     Name = Name
     dt = datetime.now()
@@ -185,8 +152,6 @@ def pinjambuku(Name, Kodebuku):
         print(f"Kode buku `{Kodebuku}` tidak ditemukan.")
 
 # Fungsi ini akan menampilkan detail buku by Kode Buku tsb
-
-
 def detailbuku(kodebuku):
     for i in DaftarBuku[0:20]:  # Mengambil data buku dari 1 s/d 20
         if kodebuku in i[1]:  # [1] guna untuk mengambil kode buku tiap list
@@ -209,8 +174,6 @@ Link: https://elibrary.bsi.ac.id/readbook/{i[1]}/{i[0].replace(" ", "-")}
         print(f"Kode buku `{kodebuku}` tidak ditemukan.")
 
 # ====== FUNGSI USER LOGIN ======
-
-
 def masuk(Username, Password):
     Sukses = False
     file = open("Data/users.txt", "r")
@@ -271,8 +234,6 @@ def masuk(Username, Password):
         akses(opsi)
 
 # ====== FUNGSI USER REGISTER ======
-
-
 def inputUser(Name, Username, Password):
     file = open("Data/users.txt", "r")
     if os.stat("Data/users.txt").st_size == 0:
@@ -305,8 +266,6 @@ def registerUser(Name, Username, Password):
         masuk(Username, Password)
 
 # ====== FUNGSI USER AKSES ======
-
-
 def akses(opsi):
     global Username
     global Name
@@ -393,8 +352,6 @@ def akses(opsi):
         print(f"Menu {opsi} tidak diketahui.")
 
 # ====== FUNGSI MEMULAI PROGRAM ======
-
-
 def mulai():
     global opsi
     welcome()
