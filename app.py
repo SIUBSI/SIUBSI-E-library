@@ -52,20 +52,25 @@ def jeda(durasijeda):  # dengan parameter jumlah durasi jeda-nya
 def daftarbuku(pagenum):
     if pagenum == 1:
         pagenum = DaftarBuku[0:10]  # Menampilkan daftar buku dari 1 s/d 10
-        print("[Halaman: 1/2]\n")  # Status Halaman
-        print("No.\tKode Buku\tJudul Buku")
-        print("---\t---------\t----------------------------------------------------------")
+        print("\n-> Halaman: 1/2")  # Status Halaman
+        print("="*80)
+        print(f"No.\tKode Buku\tJudul Buku")
+        print("="*80)
+
     elif pagenum == 2:
         pagenum = DaftarBuku[10:20]  # Menampilkan daftar buku dari 10 s/d 20
-        print("[Halaman: 2/2]\n")  # Status Halaman
-        print("No.\tKode Buku\tJudul Buku")
-        print("---\t---------\t----------------------------------------------------------")
+        print("\n-> Halaman: 2/2")  # Status Halaman
+        print("="*80)
+        print(f"No.\tKode Buku\tJudul Buku")
+        print("="*80)
 
     # Menampilkan List buku sesuai halaman (menggunakan for loop)
     num = 0  # Sebagai nomor
     for i in pagenum:
         num += 1  # Supaya nomor terhitunga dari angka 1
         print(f"{num}.\t{i[1]}\t\t{i[0]}")
+        
+    print("="*80)
 
 # Kode ini akan menambahkan objek ke index belakang kedalam file peminjaman.txt
 def tambahpinjambuku(Name, kodebuku, judulbuku, timestamp):
@@ -199,9 +204,8 @@ def masuk(Username, Password):
             elif Halaman == "2":
                 daftarbuku(2)
             elif Halaman == "menu":
-                print("-"*30)
                 while True:
-                    print("\n[1]. Pinjam buku\n[2]. Lihat detail buku\n[3]. Exit")
+                    print("\n"+"="*30+"\n[1]. Pinjam buku\n[2]. Lihat detail buku\n[3]. Exit")
                     RedirectMenuBuku = input("Masukkan pilihan [1|2|3]: ")
 
                     if RedirectMenuBuku == "1":
@@ -227,8 +231,7 @@ def masuk(Username, Password):
                 print("Nomor Halaman tidak tersedia.")
 
     else:
-        print(
-            f"\nAkun dengan username '{Username}' tidak terdaftar, silahkan daftar terlebih dahulu!")
+        print(f"\nGagal masuk, Periksa kembali data yang anda masukkan, apakah tersedia atau tidak.")
         jeda(3)
         mulai()
         akses(opsi)
