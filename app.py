@@ -357,10 +357,10 @@ def akses(opsi):
         Name = ""
         Kodebuku = ""
         Judulbuku = ""
-        print("="*133)
+        print("="*125)
         print(
             f"No.\t{'Nama peminjam':<20}\tKode Buku\t{'Waktu pinjam':<18}\tJudul Buku")
-        print("-"*133)
+        print("-"*125)
         for i, v in enumerate(file, start=1):
             a, b, c, d = v.split("#")
             a == Name
@@ -368,7 +368,7 @@ def akses(opsi):
             c == Judulbuku
             dt = datetime.fromtimestamp(float(d)).strftime("%d-%m-%y %H:%M:%S")
             print(f"{i}.\t{a:<20}\t{b:<10}\t{dt:<18}\t{c}")
-        print("="*133)
+        print("="*125)
 
         print("\n[1]. Lihat detail buku\n[2]. Exit")
         Pilihan = input("Pilih menu [1|2]: ")
