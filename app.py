@@ -12,30 +12,19 @@ DaftarBuku = [
     ["Linux untuk pratikum administrasi jaringan", "210606","Budi Susanto", "2003", "Indonesia", "Gava Media"],
     ["Administrasi jaringan komputer lintas platform", "210481","Ridwan Sanjaya, Paulus Ricky Kusuma dan Bastian Rae Lukito", "2005", "Indonesia", "PT Elex Media Komputindo"],
     ["Membangun jaringan komputer praktis sehari - hari", "210514","Iwan Binanto", "2007", "Indonesia", "Graha Ilmu"],
+
+    # Page 2
     ["Administrasi jaringan menggunakan linux ubuntu 7", "208403","Dewi Prabantini (Ed)", "2008", "Indonesia", "ANDI"],
     ["Statistika dengan program komputer", "208445","Ahmad Kholiqul Amin", "2015", "Indonesia", "Deepublish"],
     ["Penyuntingan bahasa indonesia untuk karang-mengarang","210157", "Kunjana Rahardi", "2009", "Indonesia", "Erlangga"],
     ["Robotika : desain, kontrol, dan kecerdasan buatan","210119", "Endra Pitowarno", "2006", "Indonesia", "ANDI"],
     ["Struktur data dan pemrograman dengan pascal", "208144","Heri Sismoro dan Kusrini Ikandar", "2004", "Indonesia", "ANDI"],
-
-    # Page 2
-    ["Logika dan algoritma dasar menggunakan bahasa C++", "208234","Indarwoko Kurniadi", "2013", "Indonesia", "Mitra Wacana Media"],
-    ["Konsep kecerdasan buatan", "208067","Anita Desiani dan Muhammad Arhami", "2006", "Indonesia", "ANDI"],
-    ["Dasar - dasar pemrograman pascal", "208133","Abdul Kadir", "2007", "Indonesia", "ANDI"],
-    ["Menguasai presentasi dengan microsoft powerpoint xp", "206956","Triton Prawiro Budi", "2005", "Indonesia", "Tugu Publisher"],
-    ["36 jam belajar komputer microsoft office powerpoint 2003", "206960","Budi Permana", "2005", "Indonesia", "PT Elex Media Komputindo"],
-    ["Troubleshooting windows xp : konsultasi dengan ahlinya", "207127","Jubilee Enterprise", "2008", "Indonesia", "PT Elex Media Komputindo"],
-    ["Microsoft windows me : sistem operasi masa depan", "207169","Wali Eko Djatmiko", "2001", "Indonesia", "ANDI"],
-    ["CISCO CCNA jaringan komputer", "207813","Iwan Sofana", "2010", "Indonesia", "INFORMATIKA"],
-    ["Kamus andal microsoft excel 2000", "206901","Rijanto Tosin", "2000", "bahasa", "Dinastindo"],
-    ["Teknik komputer jaringan (sistem operasi dan jaringan)", "206919","Muhammad Badrul dkk", "2010", "Indonesia", "Inti Prima"],
 ]
 
-# ====== FUNGSI WELCOME MESSAGE ======
+# ====== FUNGSI UMUM ======
 def welcome():
     os.system("cls")
-    siubsielibrary(60, "Layanan peminjaman Buku yang dikhususkan untuk Mahasiswa/i ber-Program Studi" +
-                   "\n" + "\'Sistem Informasi\' pada \'Universitas Bina Sarana Informatika\'")
+    siubsielibrary(60, "Layanan peminjaman Buku yang dikhususkan untuk Mahasiswa/i ber-Program Studi" + "\n" + "\'Sistem Informasi\' pada \'Universitas Bina Sarana Informatika\'")
     print("\n")
 
 def siubsielibrary(centernum, text):
@@ -44,22 +33,128 @@ def siubsielibrary(centernum, text):
     print("--------------------".center(centernum))
     print(text.center(centernum))
 
-# ====== FUNGSI JEDA ======
 def jeda(durasijeda):  # dengan parameter jumlah durasi jeda-nya
     time.sleep(durasijeda)  # eksekusi perintah jeda
     os.system("cls")  # Clear screen menggunakan modul os
 
-# ====== FUNGSI BUKU ======
+
+# ====== FUNGSI MENU ======
+def MenuPertama():
+    jeda(1)
+    siubsielibrary(60, "Pendaftaran Akun pada layanan SIUBSI E-library")
+    print("\nBerikut syarat-syarat yang perlu diperhatikan sebelum anda mendaftarkan akun pada Layanan 'SIUBSI E-library'")
+    print("""
+[-] Data yang dimasukkan tidak boleh ada yang kosong.
+[-] Tidak boleh mengandung karakter ',' dalam pengisian data.
+[-] Maksimum karakter adalah sebagai berikut: Nama (20), Username (15), Password (30).""")
+    print("\n\n[Pesan] Masukkan Username dan Password untuk akun anda.")
+    Name = input("Masukkan nama anda: ")
+    Username = input("Masukkan Username: ")
+    Password = getpass.getpass("Masukkan Password: ")
+    print("\nMohon tunggu sebentar...")
+    jeda(1)
+    registerUser(Name, Username, Password)
+
+def MenuKedua():
+    jeda(1)
+    siubsielibrary(60, '"Prosesi masuk dengan menginput'.center(60) + '\n' + '\'Username & Password\' pada layanan SIUBSI E-Library"')
+    print("\n[Pesan] Masukkan Username dan Password akun anda dengan benar.")
+    Username = input("Masukkan Username anda: ")
+    Password = getpass.getpass("Masukkan Password anda: ")
+    masuk(Username, Password)
+
+def MenuKetiga():
+    jeda(1)
+    os.system("cls")
+    file = open("Data/users.txt", "r")
+
+    siubsielibrary(60, "\"Daftar User terdaftar pada layanan SIUBSI E-library\"\n")
+    if os.stat("Data/users.txt").st_size == 0:
+        print("\n[Pesan] Tidak ada user yang terdaftar saat ini.\n\n[1]. Buat akun\n[2]. Exit")
+        while True:
+            menu = input("Pilih menu [1|2]: ")
+            if menu == "1":
+                jeda(1)
+                siubsielibrary(60, "Pendaftaran Akun pada layanan SIUBSI E-library.")
+                print("\n[Pesan] Masukkan Username dan Password untuk akun anda.")
+                Name = input("Masukkan nama lengkap: ")
+                Username = input("Masukkan Username: ")
+                Password = getpass.getpass("Masukkan Password: ")
+                print("\nMohon tunggu sebentar...")
+                jeda(1)
+                registerUser(Name, Username, Password)
+            elif menu == "2":
+                exit()
+            else:
+                print("Menu tidak ditemukan.\n")
+    Name = ""
+    Username = ""
+    Password = ""
+    print("="*40)
+    print(f"No.\t{'Nama':20}\t{'Username':15}")
+    print("-"*40)
+    for i, v in enumerate(file, start=1):
+        a, b, c = v.split(",")
+        a == Name
+        b == Username
+        c == Password
+        print(f"{i}.\t{a:<20}\t{b:<15}")
+    print("="*40)
+
+def MenuKeempat():
+    jeda(1)
+    os.system("cls")
+    file = open("Data/peminjaman.txt", "r")
+
+    siubsielibrary(60, "Daftar Buku yang sedang dipinjam\n")
+    if os.stat("Data/peminjaman.txt").st_size == 0:
+        return print("Tidak ada buku yang sedang dipinjam saat ini.")
+
+    Name = ""
+    Kodebuku = ""
+    Judulbuku = ""
+    print("="*125)
+    print(f"No.\t{'Nama peminjam':<20}\tKode Buku\t{'Waktu pinjam':<18}\tJudul Buku")
+    print("-"*125)
+    for i, v in enumerate(file, start=1):
+        a, b, c, d = v.split("#")
+        a == Name
+        b == Kodebuku
+        c == Judulbuku
+        dt = datetime.fromtimestamp(float(d)).strftime("%d-%m-%y %H:%M:%S")
+        print(f"{i}.\t{a:<20}\t{b:<10}\t{dt:<18}\t{c}")
+    print("="*125)
+
+    print("\n[1]. Lihat detail buku\n[2]. Exit")
+    Pilihan = input("Pilih menu [1|2]: ")
+    if Pilihan == "1":
+        Kodebukunya = input("Masukkan kode buku untuk ditampilkan detailnya: ")
+        detailbuku(Kodebukunya)
+    elif Pilihan == "2":
+        exit()
+    else:
+        print(f"Pilihan {Pilihan} tidak ditemukan.")
+
+def MenuKelima():
+    print("\n")
+    lihatstokbuku()
+
+def MenuKeenam():
+    Name = input("Masukkan nama lengkap anda: ")
+    Kodebuku = input("Masukkan Kodebuku yang ingin dikembalikan: ")
+    KembalikanBuku(Name, Kodebuku)
+
+# ====== FUNGSI PENGOPERASIAN BUKU ======
 def daftarbuku(pagenum):
     if pagenum == 1:
-        pagenum = DaftarBuku[0:10]  # Menampilkan daftar buku dari 1 s/d 10
+        pagenum = DaftarBuku[:5]  # Menampilkan daftar buku dari 1 s/d 10
         print("\n-> Halaman: 1/2")  # Status Halaman
         print("="*80)
         print(f"No.\tKode Buku\tJudul Buku")
         print("="*80)
 
     elif pagenum == 2:
-        pagenum = DaftarBuku[10:20]  # Menampilkan daftar buku dari 10 s/d 20
+        pagenum = DaftarBuku[5:]  # Menampilkan daftar buku dari 10 s/d 20
         print("\n-> Halaman: 2/2")  # Status Halaman
         print("="*80)
         print(f"No.\tKode Buku\tJudul Buku")
@@ -86,7 +181,6 @@ def lihatstokbuku():
         a, b, c = v.split("#")
         # 'end' memaksa menggantikan newline dengan nonkarakter
         print(f"{i}. {a} ({b}) - Stok: {c}", end="")
-
 
 # Memunculkan stok buku by Kode Buku
 def jumlahstok(Kodebuku):
@@ -148,26 +242,35 @@ def pinjambuku(Name, Kodebuku):
 # Fungsi ini akan menampilkan detail buku by Kode Buku tsb
 def detailbuku(kodebuku):
     for i in DaftarBuku[0:20]:  # Mengambil data buku dari 1 s/d 20
-        if kodebuku in i[1]:  # [1] guna untuk mengambil kode buku tiap list
+        if kodebuku in i[1]:  # [1] guna untuk mengambil kode buku tiap konten pada list
             jeda(1)
             siubsielibrary(
                 60, f"Menampilkan detail Buku dengan kode buku `{kodebuku}`")
             print("------------------------------------------------------".center(60))
-            return print(f"""
-Kode Buku: {i[1]}
-Judul Buku: {i[0]}
-Penulis: {i[2]}
-Tahun: {i[3]}
-Bahasa: {i[4]}
-Penerbit: {i[5]}
-Jumlah Stok: {jumlahstok(kodebuku)}
-Link: https://elibrary.bsi.ac.id/readbook/{i[1]}/{i[0].replace(" ", "-")}
-            """, end="")
+            return print(f"Kode Buku: {i[1]}\nJudul Buku: {i[0]}\nPenulis: {i[2]}\nTahun: {i[3]}\nBahasa: {i[4]}\nPenerbit: {i[5]}\nJumlah Stok: {jumlahstok(kodebuku)}\nLink: https://elibrary.bsi.ac.id/readbook/{i[1]}/{i[0].replace(' ', '-')}")
         else:
             pass
     else:
         print(f"Kode buku `{kodebuku}` tidak ditemukan.")
 
+# Proses pengolahan pada peminjaman.txt untuk fungsu pengembalian buku
+def KembalikanBuku(Name, Kodebuku):
+    file = open("Data/peminjaman.txt", "r")
+    for i in file:
+        a, b, c, d = i.split("#")
+        a == Name
+        b == Kodebuku
+
+        with open("Data/peminjaman.txt", "r", encoding='utf-8') as files:
+            filedata = files.read()
+            if f"{Name}#{Kodebuku}#{c}#{d}" in filedata:
+
+                filedata = filedata.replace(f"{Name}#{Kodebuku}#{c}#{d}", "")
+
+                with open("Data/peminjaman.txt", "w") as files:
+                    files.write(filedata)
+                
+    
 # ====== FUNGSI USER LOGIN ======
 def masuk(Username, Password):
     Sukses = False
@@ -190,18 +293,22 @@ def masuk(Username, Password):
             Halaman = input(
                 "\nPilih nomor untuk dialihkan ke halaman nomor tersebut, Masukkan 'menu' agar dialihkan ke Menu buku, Masukkan 'exit' untuk keluar dari program.\n[1|2|menu]: ")
             if Halaman == "1":
+                os.system("cls")
                 daftarbuku(1)
             elif Halaman == "2":
+                os.system("cls")
                 daftarbuku(2)
             elif Halaman == "menu":
-                print("\n"+"="*30+"\n[1]. Pinjam buku\n[2]. Lihat detail buku\n[3]. Exit")
+                print("\n"+"="*30 +
+                      "\n[1]. Pinjam buku\n[2]. Lihat detail buku\n[3]. Exit")
                 RedirectMenuBuku = input("Masukkan pilihan [1|2|3]: ")
 
                 if RedirectMenuBuku == "1":
                     Kodebuku = input("Masukkan kode buku: ")
                     pinjambuku(a, Kodebuku)
                 elif RedirectMenuBuku == "2":
-                    Pilihan = input("\nMasukkan Kode Buku ('exit' untuk keluar program): ")
+                    Pilihan = input(
+                        "\nMasukkan Kode Buku ('exit' untuk keluar program): ")
                     if Pilihan == "exit":
                         print("keluar program...")
                         jeda(2)
@@ -280,109 +387,17 @@ def akses(opsi):
     global Username
     global Name
     if opsi == "1":
-        jeda(1)
-        siubsielibrary(60, "Pendaftaran Akun pada layanan SIUBSI E-library")
-        print("\nBerikut syarat-syarat yang perlu diperhatikan sebelum anda mendaftarkan akun pada Layanan 'SIUBSI E-library'")
-        print("""
-[-] Data yang dimasukkan tidak boleh ada yang kosong.
-[-] Tidak boleh mengandung karakter ',' dalam pengisian data.
-[-] Maksimum karakter adalah sebagai berikut: Nama (20), Username (15), Password (30).""")
-        print("\n\n[Pesan] Masukkan Username dan Password untuk akun anda.")
-        Name = input("Masukkan nama anda: ")
-        Username = input("Masukkan Username: ")
-        Password = getpass.getpass("Masukkan Password: ")
-        print("\nMohon tunggu sebentar...")
-        jeda(1)
-        registerUser(Name, Username, Password)
-
+        MenuPertama()
     elif opsi == "2":
-        jeda(1)
-        siubsielibrary(60, '"Prosesi masuk dengan menginput'.center(
-            60) + '\n' + '\'Username & Password\' pada layanan SIUBSI E-Library"')
-        print("\n[Pesan] Masukkan Username dan Password akun anda dengan benar.")
-        Username = input("Masukkan Username anda: ")
-        Password = getpass.getpass("Masukkan Password anda: ")
-        masuk(Username, Password)
+        MenuKedua()
     elif opsi == "3":
-        jeda(1)
-        os.system("cls")
-        file = open("Data/users.txt", "r")
-
-        siubsielibrary(
-            60, "\"Daftar User terdaftar pada layanan SIUBSI E-library\"\n")
-        if os.stat("Data/users.txt").st_size == 0:
-            print(
-                "\n[Pesan] Tidak ada user yang terdaftar saat ini.\n\n[1]. Buat akun\n[2]. Exit")
-            while True:
-                menu = input("Pilih menu [1|2]: ")
-                if menu == "1":
-                    jeda(1)
-                    siubsielibrary(
-                        60, "Pendaftaran Akun pada layanan SIUBSI E-library.")
-                    print(
-                        "\n[Pesan] Masukkan Username dan Password untuk akun anda.")
-                    Name = input("Masukkan nama lengkap: ")
-                    Username = input("Masukkan Username: ")
-                    Password = getpass.getpass("Masukkan Password: ")
-                    print("\nMohon tunggu sebentar...")
-                    jeda(1)
-                    registerUser(Name, Username, Password)
-                elif menu == "2":
-                    exit()
-                else:
-                    print("Menu tidak ditemukan.\n")
-        Name = ""
-        Username = ""
-        Password = ""
-        print("="*40)
-        print(f"No.\t{'Nama':20}\t{'Username':15}")
-        print("-"*40)
-        for i, v in enumerate(file, start=1):
-            a, b, c = v.split(",")
-            a == Name
-            b == Username
-            c == Password
-            print(f"{i}.\t{a:<20}\t{b:<15}")
-        print("="*40)
-
+        MenuKetiga()
     elif opsi == "4":
-        jeda(1)
-        os.system("cls")
-        file = open("Data/peminjaman.txt", "r")
-
-        siubsielibrary(60, "Daftar Buku yang sedang dipinjam\n")
-        if os.stat("Data/peminjaman.txt").st_size == 0:
-            return print("Tidak ada buku yang sedang dipinjam saat ini.")
-
-        Name = ""
-        Kodebuku = ""
-        Judulbuku = ""
-        print("="*125)
-        print(
-            f"No.\t{'Nama peminjam':<20}\tKode Buku\t{'Waktu pinjam':<18}\tJudul Buku")
-        print("-"*125)
-        for i, v in enumerate(file, start=1):
-            a, b, c, d = v.split("#")
-            a == Name
-            b == Kodebuku
-            c == Judulbuku
-            dt = datetime.fromtimestamp(float(d)).strftime("%d-%m-%y %H:%M:%S")
-            print(f"{i}.\t{a:<20}\t{b:<10}\t{dt:<18}\t{c}")
-        print("="*125)
-
-        print("\n[1]. Lihat detail buku\n[2]. Exit")
-        Pilihan = input("Pilih menu [1|2]: ")
-        if Pilihan == "1":
-            Kodebukunya = input("Masukkan kode buku untuk ditampilkan detailnya: ")
-            detailbuku(Kodebukunya)
-        elif Pilihan == "2":
-            exit()
-        else:
-            print(f"Pilihan {Pilihan} tidak ditemukan.")
+        MenuKeempat()
     elif opsi == "5":
-        print("\n")
-        lihatstokbuku()
-
+        MenuKelima()
+    elif opsi == "6":
+        MenuKeenam()
     else:
         print(f"Menu {opsi} tidak diketahui.")
 
@@ -395,8 +410,9 @@ def mulai():
     print("[3] Tampilkan User terdaftar")
     print("[4] Tampilkan Buku yang sedang dipinjam")
     print("[5] Tampilkan Stok Buku keseluruhan")
-    opsi = input("Masukkan pilihan [1|2|3|4|5]: ")
-    if opsi != "1" and opsi != "2" and opsi != "3" and opsi != "4" and opsi != "5":
+    print("[6] Kembalikan buku")
+    opsi = input("Masukkan pilihan [1|2|3|4|5|6]: ")
+    if opsi != "1" and opsi != "2" and opsi != "3" and opsi != "4" and opsi != "5" and opsi != "6":
         mulai()
 
 
