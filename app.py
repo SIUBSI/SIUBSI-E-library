@@ -37,7 +37,6 @@ def jeda(durasijeda):  # dengan parameter jumlah durasi jeda-nya
     time.sleep(durasijeda)  # eksekusi perintah jeda
     os.system("cls")  # Clear screen menggunakan modul os
 
-
 # ====== FUNGSI MENU ======
 def MenuPertama():
     jeda(1)
@@ -179,8 +178,12 @@ def lihatstokbuku():
     for i, v in enumerate(file, start=1):
         # '.split("#")', untuk memisahkan kata dengan menggunakan pemisah #
         a, b, c = v.split("#")
+        c = int(c)
         # 'end' memaksa menggantikan newline dengan nonkarakter
-        print(f"{i}. {a} ({b}) - Stok: {c}", end="")
+        if c == 0:
+            print(f"{i}. {a} ({b}) - Stok: Tidak tersedia", end="\n")
+        else:
+            print(f"{i}. {a} ({b}) - Stok: {c}", end="\n")
 
 # Memunculkan stok buku by Kode Buku
 def jumlahstok(Kodebuku):
@@ -190,7 +193,10 @@ def jumlahstok(Kodebuku):
                 l_no += 1
                 a, b, c = line.split("#")
                 c = int(c)
-                return c
+                if c == 0:
+                    return 'Tidak tersedia'
+                else:
+                    return c
 
 # Fungsi mengurangkan stok buku ketika buku dipinjam
 def kuranginstokbuku(Kodebuku):
