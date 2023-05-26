@@ -1,15 +1,21 @@
-# Cara penggunaan
+## Instalasi dan Eksekusi
+***
 
-- Unduh folder projek [Download](https://github.com/SIUBSI/Tugas-Kelompok/archive/refs/heads/TugasKel.zip)
-- Open foldernya ke Code Editor kalian
-- Cara Run
+#### Dengan Menggunakan Git
 
-  Buka terminal dengan menekan ctrl+` (windows), arahkan path location nya ke lokasi dimana folder projeknya diletakkan, kalau lokasi sudah sesuai, ketik:
-```python
-python app.py
+- Diperlukan menginstal program [Git](https://git-scm.com/downloads) terlebih dahulu
+- `Eksekusi perintah dibawah`, Bisa melalui Terminal milik Sistem Operasi atau Terminal milik Penyunting Kode (Code Editor)
+```cmd
+> git clone https://github.com/SIUBSI/HitungNilai.git
+> cd HitungNilai
+> python3 hitung_nilai.py
 ```
-  atau dengan menggunakan Tombol Run jika anda sudah memiliki ekstensi Python dll pada VSCode.
-  Bisa juga dengan melalui Command Prompt (arahkan lokasinya ke lokasi dimana folder projeknya diletakkan), jika lokasi sudah sesuai, ketikkan:
-```python
-python app.py
+
+#### Dengan Langsung Mengunduh Source Code
+
+[Unduh disini](https://github.com/SIUBSI/Tugas-Kelompok/archive/refs/heads/TugasKel.zip)
+- `Eksekusi Perintah dibawah`, Bisa melalui Terminal milik Sistem Operasi atau Terminal milik Penyunting Kode (Code Editor)
+```cmd
+> cd HitungNilai
+> python3 hitung_nilai.py
 ```
