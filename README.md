@@ -13,7 +13,7 @@
 
 #### Dengan Langsung Mengunduh Source Code
 
-[Unduh disini](https://github.com/SIUBSI/Tugas-Kelompok/archive/refs/heads/TugasKel.zip)
+[Unduh Versi Terbaru](https://github.com/SIUBSI/SIUBSI-E-library/releases/tag/v1.0.0) • [Lihat Versi Tersedia](https://github.com/SIUBSI/SIUBSI-E-library/releases)
 - `Eksekusi Perintah dibawah`, Bisa melalui Terminal milik Sistem Operasi atau Terminal milik Penyunting Kode (Code Editor)
 ```cmd
 > cd HitungNilai
